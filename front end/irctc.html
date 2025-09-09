@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open and Close Window Example</title>
+</head>
+<body>
+  <h1>Open and Close Window Example</h1>
+
+  <!-- Button to open a new window -->
+  <button id="openWindowBtn">Open New Window</button>
+
+  <!-- Button to close the opened window -->
+  <button id="closeWindowBtn" disabled>Close Opened Window</button>
+
+  <script>
+    // Variable to hold reference to the opened window
+    let openedWindow = null;
+
+    // Get buttons by their IDs
+    const openBtn = document.getElementById('openWindowBtn');
+    const closeBtn = document.getElementById('closeWindowBtn');
+
+    // Event listener to open a new window when clicked
+    openBtn.addEventListener('click', () => {
+      // Open a new window/tab with specified URL and options
+      openedWindow = window.open('https://www.example.com', '_blank', 'width=600,height=400');
+
+      if (openedWindow) {
+        // Enable the close button only if window successfully opened
+        closeBtn.disabled = false;
+      } else {
+        alert('Popup blocked! Please allow popups for this site.');
+      }
+    });
+
+    // Event listener to close the opened window when clicked
+    closeBtn.addEventListener('click', () => {
+      if (openedWindow && !openedWindow.closed) {
+        openedWindow.close();  // Close the opened window
+        closeBtn.disabled = true;  // Disable the close button after closing
+        alert('Window closed successfully!');
+      } else {
+        alert('No window is open or it is already closed.');
+        closeBtn.disabled = true;
+      }
+    });
+  </script>
+</body>
+</html>

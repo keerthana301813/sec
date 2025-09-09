@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Marks Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 10px; text-align: center; }
+        button { padding: 10px 20px; margin-top: 20px; }
+    </style>
+    <script>
+        let students = [];
+
+        function addStudent() {
+            const name = document.getElementById("studentName").value;
+            const marks = parseFloat(document.getElementById("studentMarks").value);
+
+            if (name && !isNaN(marks)) {
+                students.push({ name: name, marks: marks });
+                displayStudents();
+            } else {
+                alert("Please enter valid student name and marks.");
+            }
+
+            // Reset the form
+            document.getElementById("studentName").value = "";
+            document.getElementById("studentMarks").value = "";
+        }
+
+        function displayStudents() {
+            const tableBody = document.getElementById("studentsTableBody");
+            tableBody.innerHTML = ''; // Clear the existing rows
+
+            let totalMarks = 0;
+            students.forEach((student, index) => {
+                totalMarks += student.marks;
+                const row = document.createElement("tr");
+
+                const cell1 = document.createElement("td");
+                cell1.textContent = student.name;
+                const cell2 = document.createElement("td");
+                cell2.textContent = student.marks;
+
+                row.appendChild(cell1);
+                row.appendChild(cell2);
+                tableBody.appendChild(row);
+            });
+
+            // Calculate and display the average
+            const average = totalMarks / students.length;
+            document.getElementById("averageMarks").textContent = "Average Marks: " + average.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Student Marks Dashboard</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Enter Student Details</h2>
+            <form onsubmit="event.preventDefault(); addStudent();">
+                <label for="studentName">Student Name:</label>
+                <input type="text" id="studentName" name="studentName" required>
+                <br><br>
+                <label for="studentMarks">Marks:</label>
+                <input type="number" id="studentMarks" name="studentMarks" required>
+                <br><br>
+                <button type="submit">Add Student</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Student Marks List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Marks</th>
+                    </tr>
+                </thead>
+                <tbody id="studentsTableBody">
+                    <!-- Rows will be added dynamically -->
+                </tbody>
+            </table>
+            <p id="averageMarks">Average Marks: 0</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Student Marks System</p>
+    </footer>
+</body>
+</html>
