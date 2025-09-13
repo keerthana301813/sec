@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head> 
+    <meta charset="UTF-8">
+    <title>jQuery Example</title>
+    <body>
+        <h1> Click the button!</h1>
+        <h2>  Click  the Duplicate button</h2>
+        <button>Click me</button>
+        
+        <script>
+            $(document).ready(function() {
+                $("button").click(function() {
+                    $("h2").text("Button Clicked !");
+                    $("h3").text("Button Clicked ! Duplicate");
+                });
+            });
+        </script>
+    </body>
+</html>
