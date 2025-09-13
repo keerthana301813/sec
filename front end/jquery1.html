@@ -63,6 +63,9 @@
 </body>
 </html>
 
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,7 +75,8 @@
     body { font-family: Arial, sans-serif; margin: 30px; }
     #taskInput { width: 200px; }
     #taskList li { margin: 5px 0; }
-    .remove-btn { margin-left: 10px; color: rgb(88, 175, 191); cursor: pointer; }
+    .remove-btn, .complete-btn { margin-left: 10px; color: rgb(0, 0, 0); cursor: pointer; }
+    .completed { text-decoration: line-through; color: gray; }
   </style>
 </head>
 <body>
@@ -87,18 +91,26 @@
         let task = $("#taskInput").val().trim();
         if(task){
           $("#taskList").append(
-            `<li>${task} <span class="remove-btn">Remove</span></li>`
+            `<li>${task} <span class="complete-btn">Complete</span> <span class="remove-btn">Remove</span></li>`
           );
           $("#taskInput").val("");
         }
       });
 
       // Remove task when clicking "Remove"
-      $("#taskList").on("click", ".remove-btn", function(){
+      $("#taskList").on("click", ".remove-btn", function() {
         $(this).parent().remove();
       });
-    });
+
+      // Mark task as complete when clicking "Complete"
+      $("#taskList").on("click", ".complete-btn", function() {
+        $(this).parent().toggleClass("completed");
+      });
+      // Mark as complete
+      $("#taskList").on("click", "#done", function(){
+      $(this).parent().css("background-color","yellow");
+});
+});
   </script>
 </body>
-</html>
-
+</html> 
