@@ -1,116 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>;
+  <title>To do List</title>
 </head>
 <body>
-  <h2>Hello jQuery</h2>
-  <h3>just for timepass</h3>
-  <button id="btn">Click Me</button>
-    <div class="temp">
-        <p>this is a different division
-            on which we are using the class tags using jquery
-        </p>
-    </div>
-    <input type="text" id="myInput">
-<p id="output">Hi this text</p>
-<ul id="list">
-  <li>Item 1</li>
-</ul>
-<button id="add">Add Item</button>
-<button id="addf">Add Item first</button>
-<button id="remove">Remove first</button>
-
-
-  <script>
-    $(document).ready(function(){
-      $("#btn").click(function(){
-        $("h2").text("Button Clicked!");
-        $("h3").text("Button Clicked! Duplicate");
-        $(".temp").css("background-color", "salmon");
-        $("p").css("font-weight", "bold");
-      });
-
-
-
-    $("#add").click(function(){
-      $("#list").append("<li>New Item appended from script</li>");
-    });
-    $("#addf").click(function(){
-      $("#list").prepend("<li>New Item prepended from script</li>");
-    });
-    $("#remove").click(function(){
-      $("#list li:first").remove();
-    });
-      $("#myInput").keydown(function(){
-      let val = $("#myInput").val();
-      $("#output").text(val);
-    });
-      $("#btn").dblclick(function(){
-        $("h2").text("Button Clicked Twice!");
-        $("h3").text("Button Clicked! Twice Duplicate");
-        $(".temp").css("background-color", "fuchsia");
-        $("p").css("font-weight", "verdana");
-      });
-      $("#btn").hover(function(){
-        $("h2").text("Button Clicked but Hovered!");
-        $("h3").text("Button  and Hovered! Duplicate");
-        $(".temp").css("background-color", "cyan");
-        $("p").css("font-weight", "italic");
-      });
-    });
-  </script>
+    <H1> To Do List </H1>
+    <br><br>
+    <h2>These are your tasks to complete</h2>
+    <ul id="taskList">
+      <li>Sample Task 1 <button id='done'>Complete</button> <button class='delete'>Delete</button></li>
+      <li>Sample Task 2 <button id='done'>Complete</button> <button class='delete'>Delete</button></li>
+    </ul>
+    <input type="text" id="taskInput" placeholder="Enter new task">
+    <button id="addTask">Add Task</button>
 </body>
 </html>
-
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Task List</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 30px; }
-    #taskInput { width: 200px; }
-    #taskList li { margin: 5px 0; }
-    .remove-btn, .complete-btn { margin-left: 10px; color: rgb(0, 0, 0); cursor: pointer; }
-    .completed { text-decoration: line-through; color: gray; }
-  </style>
-</head>
-<body>
-  <h2>Task Manager</h2>
-  <input type="text" id="taskInput" placeholder="Enter your task">
-  <button id="addTask">Add Task</button>
-  <ul id="taskList"></ul>
-
-  <script>
-    $(document).ready(function(){
-      $("#addTask").click(function(){
-        let task = $("#taskInput").val().trim();
-        if(task){
-          $("#taskList").append(
-            `<li>${task} <span class="complete-btn">Complete</span> <span class="remove-btn">Remove</span></li>`
-          );
-          $("#taskInput").val("");
-        }
-      });
-
-      // Remove task when clicking "Remove"
-      $("#taskList").on("click", ".remove-btn", function() {
-        $(this).parent().remove();
-      });
-
-      // Mark task as complete when clicking "Complete"
-      $("#taskList").on("click", ".complete-btn", function() {
-        $(this).parent().toggleClass("completed");
-      });
-      // Mark as complete
-      $("#taskList").on("click", "#done", function(){
-      $(this).parent().css("background-color","yellow");
+<script>
+$(document).ready(function(){
+$("#addTask").click(function(){
+  let task = $("#taskInput").val();
+  if(task !== ""){
+    $("#taskList").append(
+      `<li>${task}
+        <button id='done'>Complete</button>
+        <button class='delete'>Delete</button>
+      </li>`
+    );
+    $("#taskInput").val("");
+  }
+});
+$("#taskList").on("click", "#done", function(){
+  $(this).parent().css("background-color","cyan");
+});
+$("#taskList").on("click", ".delete", function(){
+  $(this).parent().remove();
 });
 });
-  </script>
-</body>
-</html> 
+</script>
