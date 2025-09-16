@@ -38,3 +38,64 @@ $("#taskList").on("click", ".delete", function(){
 });
 });
 </script>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Editable To-Do</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      padding: 6px;
+      border-bottom: 1px solid #ccc;
+      cursor: pointer;
+    }
+    input.editing {
+      width: 90%;
+      padding: 4px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h2>To-Do List</h2>
+  <ul id="todo-list">
+    <li>Buy groceries</li>
+    <li>Complete project</li>
+    <li>Go for a walk</li>
+  </ul>
+
+  <script>
+    $(document).ready(function(){
+      $("#todo-list").on("dblclick", "li", function() {
+        let currentText = $(this).text();
+        let input = $("<input type='text' class='editing'>").val(currentText);
+        $(this).html(input);
+        input.focus();
+
+        // Save on Enter
+        input.keydown(function(e) {
+          if (e.key === "Enter") {
+            let newText = $(this).val();
+            $(this).parent().text(newText);
+          }
+
+        });
+
+        // Save on blur (click outside)
+        input.blur(function() {
+          let newText = $(this).val();
+          $(this).parent().text(newText);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
